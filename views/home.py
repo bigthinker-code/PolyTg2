@@ -3,9 +3,11 @@ import streamlit as st
 from core.ui import card
 
 st.markdown(
-    '<div class="pt-hero"><h1>Predict polymer Tg and know how far to trust it.</h1>'
+    '<div class="pt-banner"><h1>Predict polymer Tg and know how far to trust it.</h1>'
     "<p>PolyTg reads the repeat unit of a polymer and returns its glass transition temperature "
-    "with a conformal interval and a check against the training data.</p></div>",
+    "with a conformal interval and a check against the training data.</p>"
+    '<div class="pt-chips"><span>Conformal interval</span><span>Applicability domain</span>'
+    "<span>Batch CSV</span></div></div>",
     unsafe_allow_html=True,
 )
 
@@ -23,5 +25,11 @@ c2.markdown(
 )
 c3.markdown(
     card("Check the domain", "Every prediction is compared with the training data. If the polymer is too far from it, PolyTg tells you."),
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    '<div class="pt-note">Screening candidate polymers on screen before making them saves reagents, '
+    "solvent and bench time. That makes PolyTg a small step toward greener materials work.</div>",
     unsafe_allow_html=True,
 )
