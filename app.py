@@ -2,7 +2,7 @@ import streamlit as st
 
 from core.ui import inject_css
 
-st.set_page_config(page_title="PolyTg", page_icon="🧪", layout="wide")
+st.set_page_config(page_title="PolyTg", page_icon="🌿", layout="wide")
 inject_css()
 
 pages = [
@@ -14,7 +14,12 @@ pages = [
 ]
 
 with st.sidebar:
-    st.markdown("### PolyTg")
-    st.caption("Polymer glass transition temperature, with an honest range.")
+    st.markdown(
+        '<div class="pt-brand"><svg width="28" height="28" viewBox="0 0 24 24">'
+        '<path d="M12 2l8.66 5v10L12 22l-8.66-5V7z" fill="none" stroke="#8FD14F" stroke-width="2"/>'
+        '<circle cx="12" cy="12" r="3" fill="#8FD14F"/></svg><span>PolyTg</span></div>'
+        '<div class="pt-tag">Polymer glass transition temperature, with an honest range.</div>',
+        unsafe_allow_html=True,
+    )
 
 st.navigation(pages).run()
