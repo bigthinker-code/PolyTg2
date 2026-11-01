@@ -21,6 +21,5 @@ with st.sidebar:
         '<div class="pt-tag">Polymer glass transition temperature, with an honest range.</div>',
         unsafe_allow_html=True,
     )
-import core.ui as _ui
-st.sidebar.caption("ui has: " + str([n for n in dir(_ui) if n in ("quick_result", "compare_scale", "verdict", "big_number")]))
+
 st.navigation(pages).run()
