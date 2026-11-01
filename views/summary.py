@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-from core.ui import page_header, render_result, stat
+from core.ui import compare_scale, page_header, render_result, stat
 
 page_header("Results Summary", "Everything you have predicted in this session, in one place.")
 
@@ -21,14 +21,14 @@ c2.markdown(stat("Inside the domain", f"{inside} of {len(df)}"), unsafe_allow_ht
 c3.markdown(stat("Tg range", f'{df["tg_k"].min():.0f} to {df["tg_k"].max():.0f} K'), unsafe_allow_html=True)
 
 st.write("")
+st.subheader("Compare on one scale")
+st.caption("Each marker is a predicted Tg and the box around it is its conformal interval. Showing the latest 12.")
+st.markdown(compare_scale(history[-12:]), unsafe_allow_html=True)
+
 st.subheader("Latest result")
 render_result(history[-1])
 
 st.subheader("All predictions")
-chart = df.copy()
-chart["item"] = [f"{i + 1}. {n}" for i, n in enumerate(chart["label"])]
-st.bar_chart(chart.set_index("item")["tg_k"], y_label="Tg (K)", color="#2B5BDE")
-
 table = df[["time", "label", "psmiles", "tg_k", "tg_c", "lower", "upper", "in_domain"]].rename(
     columns={
         "time": "Time", "label": "Name", "psmiles": "Polymer SMILES", "tg_k": "Tg (K)",
@@ -42,4 +42,5 @@ d1.download_button("Download CSV", table.to_csv(index=False), "polytg_results.cs
 if d2.button("Clear history"):
     st.session_state.history = []
     st.session_state.last_result = None
+    st.session_state.home_result = None
     st.rerun()
